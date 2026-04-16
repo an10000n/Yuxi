@@ -3,6 +3,8 @@
 
 Yuxi 是一个基于大模型的智能知识库与知识图谱智能体开发平台，融合了 RAG 技术与知识图谱技术，基于 LangGraph v1 + Vue.js + FastAPI + LightRAG 架构构建。项目完全通过 Docker Compose 进行管理，支持热重载开发。
 
+架构代码地图见 [ARCHITECTURE.md](ARCHITECTURE.md)。修改不熟悉的模块前，先阅读其中的后端、前端、运行链路和架构不变量说明，再用符号搜索定位具体实现；该文档只维护相对稳定的系统边界，不替代细节文档或源码注释。
+
 ## 开发准则
 
 Avoid over-engineering. Only make changes that are directly requested or clearly necessary. Keep solutions simple and focused.
@@ -12,6 +14,8 @@ Don't add features, refactor code, or make "improvements" beyond what was asked.
 Don't add error handling, fallbacks, or validation for scenarios that can't happen. Trust internal code and framework guarantees. Only validate at system boundaries (user input, external APIs). Don't use backwards-compatibility shims when you can just change the code.
 
 Don't create helpers, utilities, or abstractions for one-time operations. Don't design for hypothetical future requirements. The right amount of complexity is the minimum needed for the current task. Reuse existing abstractions where possible and follow the DRY principle.
+
+To ensure readability, it is necessary to add essential comments at key points, particularly to explain the functionality of a function and the design intent.
 
 ## 开发与调试工作流 (Development & Debugging Workflow)
 
@@ -37,8 +41,6 @@ Don't create helpers, utilities, or abstractions for one-time operations. Don't 
 # 代码检查和格式化
 make format        # 格式化代码
 
-# 直接在容器内执行命令
-docker compose exec api uv run python test/your_script.py  # 放在 test 文件夹
 ```
 注意：
 - Python 代码要符合 pythonic 风格
